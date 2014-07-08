@@ -1,4 +1,6 @@
 # cabot-cookbook
+![travis build status](https://travis-ci.org/rafaelmagu/chef-cabot.svg?branch=master)
+
 
 [Cabot](http://cabotapp.com) is a self-hosted watchdog for your websites and infrastructure. This cookbook installs and configures a basic setup.
 
