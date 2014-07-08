@@ -75,7 +75,7 @@ All keys below live under the <tt>cabot</tt> namespace. Eg. <tt>user</tt> is ava
   </tr>
   <tr>
     <td><tt>port</tt></td>
-    <td>String</td>
+    <td>Integer</td>
     <td>Sets the port on which Cabot UI listens for requests</td>
     <td><tt>5000</tt></td>
   </tr>
@@ -211,6 +211,12 @@ All keys below live under the <tt>cabot</tt> namespace. Eg. <tt>user</tt> is ava
     <td>Which URL scheme to use (http or https)</td>
     <td><tt>http</tt></td>
   </tr>
+  <tr>
+    <td><tt>www_port</tt></td>
+    <td>Integer</td>
+    <td>Port to set reverse proxy on</td>
+    <td><tt>80</tt></td>
+  </tr>
 </table>
 
 ## Usage
@@ -226,6 +232,10 @@ Include `cabot` in your node's `run_list`:
   ]
 }
 ```
+
+### cabot::proxy
+
+Include `cabot::proxy` in your node's `run_list` to have Nginx as a reverse proxy to Cabot on port 80.
 
 ## Contributing
 

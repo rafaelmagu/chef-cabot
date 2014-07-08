@@ -8,10 +8,44 @@
 # MIT License
 #
 
-%w(ubuntu git nginx python redis build-essential).each do |cookbook|
+# dependency setup
+%w(ubuntu git npm python redis build-essential).each do |cookbook|
   include_recipe cookbook
 end
 
+%w(ruby1.9.1 libpq-dev).each do |pkg|
+  package pkg do
+    action :install
+  end
+end
+
+%w(coffee-script less).each do |pkg|
+  npm_package pkg do
+    action :install
+  end
+end
+
+gem_package 'foreman' do
+  action :install
+end
+
+{
+  'Django' => '1.4.10', 'PyJWT' => '0.1.2', 'South' => '0.7.6', 'amqp' => '1.4.5', 'anyjson' => '0.3.3',
+  'argparse' => '1.2.1', 'billiard' => '3.3.0.13', 'celery' => '3.1.7', 'distribute' => '0.6.24',
+  'dj-database-url' => '0.2.2', 'django-appconf' => '0.6', 'django-celery' => '3.1.1',
+  'django-celery-with-redis' => '3.0', 'django-compressor' => '1.2', 'django-jsonify' => '0.2.1',
+  'django-mptt' => '0.6.0', 'django-polymorphic' => '0.5.3', 'django-redis' => '1.4.5', 'django-smtp-ssl' => '1.0',
+  'gunicorn' => '18.0', 'hiredis' => '0.1.1', 'httplib2' => '0.7.7', 'icalendar' => '3.2', 'kombu' => '3.0.8',
+  'mock' => '1.0.1', 'psycopg2' => '2.5.1', 'pytz' => '2013.9', 'redis' => '2.9.0', 'requests' => '0.14.2',
+  'six' => '1.5.1', 'twilio' => '3.4.1', 'wsgiref' => '0.1.2', 'python-dateutil' => '2.1'
+}.each do |mod, version|
+  python_pip mod do
+    action :install
+    version version
+  end
+end
+
+# user setup
 group node[:cabot][:group]
 
 user node[:cabot][:user] do
@@ -21,19 +55,19 @@ user node[:cabot][:user] do
   shell '/bin/bash'
 end
 
-package 'ruby1.9.1' do
-  action :install
-end
-
-gem_package 'foreman' do
-  action :install
-end
-
 directory node[:cabot][:home_dir] do
+  action :create
   owner node[:cabot][:user]
   group node[:cabot][:group]
 end
 
+directory node[:cabot][:log_dir] do
+  owner node[:cabot][:user]
+  group node[:cabot][:group]
+  mode 0775
+end
+
+# app deploy
 git node[:cabot][:home_dir] do
   action :sync
   repository node[:cabot][:repo_url]
@@ -72,7 +106,7 @@ template "#{node[:cabot][:home_dir]}/conf/production.env" do
             www_http_host: node[:cabot][:www_http_host],
             www_scheme: node[:cabot][:www_scheme]
           )
-  notifies :run, 'bash[install from requirements.txt]'
+  notifies :run, 'bash[run migrations]', :immediately
 end
 
 bash 'run migrations' do
@@ -89,7 +123,7 @@ bash 'collect static assets' do
   cwd node[:cabot][:home_dir]
   code <<-EOH
     foreman run python manage.py collectstatic --noinput -e conf/#{node[:cabot][:environment]}.env
-    foreman run python manage.py compress -e conf/#{node[:cabot][:environment]}.env
+    foreman run python manage.py compress --force -e conf/#{node[:cabot][:environment]}.env
   EOH
   action :nothing
   notifies :run, 'bash[setup upstart]', :immediately

@@ -2,6 +2,7 @@ default[:cabot][:user] = 'cabot'
 default[:cabot][:group] = 'cabot'
 default[:cabot][:home_dir] = '/opt/cabot'
 default[:cabot][:log_dir] = '/var/log/cabot'
+default[:cabot][:virtualenv_dir] = "#{node[:cabot][:home_dir]}/venv"
 
 default[:cabot][:repo_url] = 'https://github.com/arachnys/cabot.git'
 
@@ -14,7 +15,7 @@ else
 end
 
 default[:cabot][:database_url] = 'sqlite:///cabot.db'
-default[:cabot][:port] = '5000'
+default[:cabot][:port] = 5000
 default[:cabot][:admin_email] = 'you@example.com'
 default[:cabot][:from_email] = 'cabot@example.com'
 default[:cabot][:ical_url] = 'http://www.google.com/calendar/ical/example.ics'
@@ -37,12 +38,16 @@ default[:cabot][:twilio_auth_token] = 'your_twilio_auth_token'
 default[:cabot][:twilio_outgoing_number] = '+1234567890'
 default[:cabot][:www_http_host] = 'localhost'
 default[:cabot][:www_scheme] = 'http'
+default[:cabot][:www_port] = 80
 
 default[:cabot][:postgresql][:database] = 'index'
 default[:cabot][:postgresql][:username] = 'cabot'
 default[:cabot][:postgresql][:password] = 'changeme'
 
 default[:'build-essential'][:compile_time] = true
+
 default[:apt][:compile_time_update] = true
 default[:nginx][:default_site_enabled] = false
-default[:nodejs][:install_method] = 'package'
+default[:npm][:version] = '1.4.20'
+default[:nodejs][:npm] = node[:npm][:version]
+# default[:nodejs][:install_method] = 'package'

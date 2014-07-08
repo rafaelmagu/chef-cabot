@@ -1,6 +1,7 @@
 require 'chefspec'
 require 'chefspec/berkshelf'
 require 'chefspec/cacher'
+require_relative 'support/matchers'
 
 # ChefSpec::Coverage.start!
 
