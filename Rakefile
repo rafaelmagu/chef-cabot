@@ -5,7 +5,7 @@ namespace :style do
   begin
     require 'rubocop/rake_task'
     desc 'Run Ruby style checks'
-    Rubocop::RakeTask.new(:ruby)
+    Rubocop::RakeTask.new('ruby')
   rescue LoadError
     puts '>>>>> Rubocop gem not loaded, omitting tasks' unless ENV['CI']
   end
@@ -14,7 +14,7 @@ namespace :style do
     require 'foodcritic'
 
     desc 'Run Chef style checks'
-    FoodCritic::Rake::LintTask.new(:chef) do |t|
+    FoodCritic::Rake::LintTask.new('chef') do |t|
       t.options = {
         fail_tags: ['any']
       }

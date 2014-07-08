@@ -9,6 +9,7 @@ group :development do
   gem 'thor-foodcritic'
   gem 'guard-rspec'
   gem 'guard-foodcritic'
+  gem 'rubocop'
 end
 
 group :integration do
