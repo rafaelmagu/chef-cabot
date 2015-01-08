@@ -219,6 +219,12 @@ All keys below live under the <tt>cabot</tt> namespace. Eg. <tt>user</tt> is ava
     <td>Port to set reverse proxy on</td>
     <td><tt>80</tt></td>
   </tr>
+  <tr>
+    <td><tt>django_settings_module</tt></td>
+    <td>String</td>
+    <td>Django settings module name</td>
+    <td><tt>cabot.settings</tt></td>
+  </tr>
 </table>
 
 ## Usage
