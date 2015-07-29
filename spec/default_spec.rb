@@ -1,4 +1,3 @@
-# rubocop:disable LineLength
 require 'spec_helper'
 
 describe 'cabot::default' do

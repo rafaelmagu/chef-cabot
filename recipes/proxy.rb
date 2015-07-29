@@ -1,4 +1,3 @@
-# rubocop:disable LineLength
 #
 # Cookbook Name:: cabot
 # Recipe:: proxy

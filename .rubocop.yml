@@ -1,12 +1,12 @@
 AllCops:
-  Includes:
+  Include:
     - Berksfile
     - Gemfile
     - Rakefile
     - Thorfile
     - Guardfile
-  Excludes:
-    - vendor/**
+  Exclude:
+    - vendor/**/*
 
 ClassLength:
   Enabled: false

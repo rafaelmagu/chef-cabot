@@ -1,4 +1,3 @@
-# rubocop:disable allCops
 guard :foodcritic, all_on_start: false do
   watch(%r{attributes/.+\.rb$})
   watch(%r{providers/.+\.rb$})

@@ -1,4 +1,3 @@
-# rubocop:disable LineLength
 #
 # Cookbook Name:: cabot
 # Recipe:: default
@@ -79,33 +78,33 @@ template "#{node[:cabot][:home_dir]}/conf/production.env" do
   action :create
   source 'production.env.erb'
   variables(
-            debug: node[:cabot][:debug],
-            database_url: node[:cabot][:database_url],
-            port: node[:cabot][:port],
-            virtualenv_dir: node[:cabot][:virtualenv_dir],
-            admin_email: node[:cabot][:admin_email],
-            from_email: node[:cabot][:from_email],
-            ical_url: node[:cabot][:ical_url],
-            celery_broker_url: node[:cabot][:celery_broker_url],
-            django_secret_key: node[:cabot][:django_secret_key],
-            graphite_api_url: node[:cabot][:graphite_api_url],
-            graphite_username: node[:cabot][:graphite_username],
-            graphite_password: node[:cabot][:graphite_password],
-            hipchat_room_id: node[:cabot][:hipchat_room_id],
-            hipchat_api_key: node[:cabot][:hipchat_api_key],
-            jenkins_api_url: node[:cabot][:jenkins_api_url],
-            jenkins_username: node[:cabot][:jenkins_username],
-            jenkins_password: node[:cabot][:jenkins_password],
-            smtp_host: node[:cabot][:smtp_host],
-            smtp_username: node[:cabot][:smtp_username],
-            smtp_password: node[:cabot][:smtp_password],
-            smtp_port: node[:cabot][:smtp_port],
-            twilio_account_sid: node[:cabot][:twilio_account_sid],
-            twilio_auth_token: node[:cabot][:twilio_auth_token],
-            twilio_outgoing_number: node[:cabot][:twilio_outgoing_number],
-            www_http_host: node[:cabot][:www_http_host],
-            www_scheme: node[:cabot][:www_scheme]
-          )
+    debug: node[:cabot][:debug],
+    database_url: node[:cabot][:database_url],
+    port: node[:cabot][:port],
+    virtualenv_dir: node[:cabot][:virtualenv_dir],
+    admin_email: node[:cabot][:admin_email],
+    from_email: node[:cabot][:from_email],
+    ical_url: node[:cabot][:ical_url],
+    celery_broker_url: node[:cabot][:celery_broker_url],
+    django_secret_key: node[:cabot][:django_secret_key],
+    graphite_api_url: node[:cabot][:graphite_api_url],
+    graphite_username: node[:cabot][:graphite_username],
+    graphite_password: node[:cabot][:graphite_password],
+    hipchat_room_id: node[:cabot][:hipchat_room_id],
+    hipchat_api_key: node[:cabot][:hipchat_api_key],
+    jenkins_api_url: node[:cabot][:jenkins_api_url],
+    jenkins_username: node[:cabot][:jenkins_username],
+    jenkins_password: node[:cabot][:jenkins_password],
+    smtp_host: node[:cabot][:smtp_host],
+    smtp_username: node[:cabot][:smtp_username],
+    smtp_password: node[:cabot][:smtp_password],
+    smtp_port: node[:cabot][:smtp_port],
+    twilio_account_sid: node[:cabot][:twilio_account_sid],
+    twilio_auth_token: node[:cabot][:twilio_auth_token],
+    twilio_outgoing_number: node[:cabot][:twilio_outgoing_number],
+    www_http_host: node[:cabot][:www_http_host],
+    www_scheme: node[:cabot][:www_scheme]
+  )
   notifies :run, 'bash[run migrations]', :immediately
 end
 
