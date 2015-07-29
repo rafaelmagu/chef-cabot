@@ -4,7 +4,7 @@ maintainer_email 'rafael.magu@gmail.com'
 license          'MIT'
 description      'Installs and configures Cabot'
 long_description IO.read(File.join(File.dirname(__FILE__), 'README.md'))
-version          '1.0.0'
+version          '1.0.2'
 
 depends 'build-essential', '~> 2.0.4'
 depends 'git', '~> 4.0.2'

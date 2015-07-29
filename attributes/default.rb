@@ -39,6 +39,7 @@ default[:cabot][:twilio_outgoing_number] = '+1234567890'
 default[:cabot][:www_http_host] = 'localhost'
 default[:cabot][:www_scheme] = 'http'
 default[:cabot][:www_port] = 80
+default[:cabot][:django_settings_module] = 'cabot.settings'
 
 default[:cabot][:postgresql][:database] = 'index'
 default[:cabot][:postgresql][:username] = 'cabot'
